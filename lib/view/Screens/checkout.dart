@@ -46,19 +46,21 @@ class CheckOut extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       child: ListTile(
-                        subtitle: Text("Test"),
+                        title: Text(
+                          "${carttt.selectedProducts[index].nameItem}",
+                        ),
+                        subtitle: Text("\$ ${carttt.selectedProducts[index].priceItem}"),
                         leading: CircleAvatar(
                           backgroundImage: AssetImage(
                             // "assets/images/pic1.png"),
                             "${carttt.selectedProducts[index].imgPath}",
                           ),
                         ),
-                        title: Text(
-                          "${carttt.selectedProducts[index].nameItem}",
-                        ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
-                          onPressed: () {},
+                          onPressed: () {
+                            carttt.delete(carttt.selectedProducts[index]);
+                          },
                         ),
                       ),
                     );

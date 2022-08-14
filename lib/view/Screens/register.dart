@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import '../../model/register_model.dart';
 import '../../shared/colors.dart';
 import '../../shared/custom_textfield.dart';
+import 'home.dart';
 import 'login.dart';
 
 class Registration extends StatelessWidget {
-    Registration({Key? key}) : super(key: key);
+  Registration({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,17 +38,18 @@ class Registration extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Sign Up'),
-          backgroundColor: BTNred,
-        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                width: double.infinity,
-                color: Colors.red,
-                height: 100,
+                child: ClipPath(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 180,
+                    color: Colors.red,
+                  ),
+                  clipper: CustomClipPath(),
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -58,10 +60,10 @@ class Registration extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hello",
+                    Text("Registration",
                         style: TextStyle(fontSize: 65, color: Colors.grey)),
                     Text(
-                      "Sign Up",
+                      "Create Account",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -95,7 +97,7 @@ class Registration extends StatelessWidget {
                         height: 20,
                       ),
                       MyTextField(
-                        controllerrrr:  confirmPasswordController,
+                        controllerrrr: confirmPasswordController,
                         textInputTypeee: TextInputType.text,
                         isPassword: true,
                         labelText: 'Confirm Password',
@@ -106,7 +108,7 @@ class Registration extends StatelessWidget {
                         height: 20,
                       ),
                       MyTextField(
-                        controllerrrr:  phoneController ,
+                        controllerrrr: phoneController,
                         textInputTypeee: TextInputType.phone,
                         isPassword: false,
                         labelText: 'Phone',
@@ -120,20 +122,27 @@ class Registration extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                            logUser(
-                              loginUser: AddUser(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  confirmPassword: confirmPasswordController.text,
-                                  phone: phoneController.text),
-        
-                              );
+                          logUser(
+                            loginUser: AddUser(
+                                email: emailController.text,
+                                password: passwordController.text,
+                                confirmPassword: confirmPasswordController.text,
+                                phone: phoneController.text),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(BTNred),
-                          padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(20)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
                         ),
                         child: Text(
                           "Registration",

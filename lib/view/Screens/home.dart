@@ -3,7 +3,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:project_ecommerce_app/view/Screens/checkout.dart';
 import 'package:project_ecommerce_app/view/Screens/details.dart';
+import 'package:project_ecommerce_app/view/Screens/login.dart';
 
 import '../../shared/appbar.dart';
 import '../../shared/item.dart';
@@ -53,12 +55,26 @@ class _HomeState extends State<Home> {
                 ListTile(
                   title: Text("Home"),
                   leading: Icon(Icons.home),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: Text("My Card"),
                   leading: Icon(Icons.shopping_bag_rounded),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckOut(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: Text("About"),
@@ -68,7 +84,15 @@ class _HomeState extends State<Home> {
                 ListTile(
                   title: Text("Logout"),
                   leading: Icon(Icons.logout_sharp),
-                  onTap: () {},
+                  onTap: () {
+                                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );                 
+                  
+                  },
                 ),
               ],
             ),
@@ -81,7 +105,9 @@ class _HomeState extends State<Home> {
             ),
           ],
         )),
-        appBar: AppBar(actions: [ProductsAndPrice()],),
+        appBar: AppBar(
+          actions: [ProductsAndPrice()],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView.builder(

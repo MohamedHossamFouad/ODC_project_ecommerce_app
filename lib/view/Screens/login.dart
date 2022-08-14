@@ -10,6 +10,7 @@ import '../../model/login_model.dart';
 import '../../shared/item.dart';
 import '../../shared/colors.dart';
 import '../../shared/custom_textfield.dart';
+import '../../shared/wave.dart';
 import 'home.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,23 +20,22 @@ class LoginScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-          backgroundColor: BTNred,
-        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                width: double.infinity,
-                color: Color.fromARGB(255, 54, 244, 101),
-                height: 100,
+                child: ClipPath(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 180,
+                    color: Colors.red,
+                  ),
+                  clipper: CustomClipPath(),
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -46,10 +46,10 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hello",
+                    Text("Sign In",
                         style: TextStyle(fontSize: 65, color: Colors.grey)),
                     Text(
-                      "Sign Up",
+                      "Welcome Back",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -87,16 +87,17 @@ class LoginScreen extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Details(products: items[1]),
+                              builder: (context) => Home(),
                             ),
                           );
-
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(BTNred),
-                          padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(20)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
                         ),
                         child: Text(
                           "Sign In",
@@ -139,4 +140,23 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class CustomClipPath extends CustomClipper<Path> {
+  var radius = 10.0;
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height);
+    path.quadraticBezierTo(
+        size.width / 4, size.height - 40, size.width / 2, size.height - 20);
+    path.quadraticBezierTo(
+        3 / 4 * size.width, size.height, size.width, size.height - 30);
+    path.lineTo(size.width, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

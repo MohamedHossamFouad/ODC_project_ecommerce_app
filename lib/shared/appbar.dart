@@ -17,7 +17,7 @@ class ProductsAndPrice extends StatelessWidget {
         Stack(
           children: [
             Positioned(
-              bottom: 24,
+              bottom: 17,
               child: Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(

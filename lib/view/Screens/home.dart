@@ -126,7 +126,7 @@ class _HomeState extends State<Home> {
                           height: 25,
                         ),
                         Text(
-                          "\$ ${items[index].price}",
+                          "\$ ${items[index].priceItem}",
                           style: TextStyle(fontSize: 24),
                         ),
                       ],
